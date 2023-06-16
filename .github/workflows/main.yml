@@ -35,4 +35,5 @@ jobs:
             key: ${{ secrets.ACTOR_PRIVATE_KEY }}
             host: ${{ secrets.SSH_HOST }}
             port: ${{ secrets.SSH_PORT }}
-            script: "echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker run -d -p 80:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/communications_api:${{ github.sha }}"
+            # Тут стоит сделать переменными порты приложения и хостовой машины, but not today
+            script: "echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker run -d -p 19999:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/communications_api:${{ github.sha }}"
