@@ -8,8 +8,8 @@ from django.db import models
 class Communication(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     score = models.IntegerField()
-    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='user')
-    foreign_user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='foreign_user')
+    user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE, related_name='user')
+    foreign_user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE, related_name='foreign_user')
     event = models.ForeignKey('events.Event', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
