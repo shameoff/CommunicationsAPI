@@ -35,4 +35,4 @@ jobs:
             key: ${{ secrets.ACTOR_PRIVATE_KEY }}
             host: ${{ secrets.SSH_HOST }}
             port: ${{ secrets.SSH_PORT }}
-            script: "sudo docker run -d -p 80:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/communications_api:${{ github.sha }}"
+            script: "echo ${{ secrets.SUDO_PASSWORD }} | sudo -S docker run -d -p 80:8080 ${{ secrets.DOCKER_HUB_USERNAME }}/communications_api:${{ github.sha }}"
