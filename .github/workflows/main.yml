@@ -57,6 +57,6 @@ jobs:
             export SERVER_NAME=api.shameoff.site
             export APP_NAME=communications_api
             cd /var/www/code/$APP_NAME
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/deploy.sh 
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E scripts/deploy.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/*.sh 
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/deploy.sh
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/certbot.sh
