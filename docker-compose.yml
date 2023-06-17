@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    build:
+    build: # Билд нужен только для разработки. В продакшн среде не используется
       dockerfile: Dockerfile
       context: .
     image: shameoff/communications_api:latest
