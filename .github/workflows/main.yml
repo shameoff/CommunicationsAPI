@@ -41,7 +41,7 @@ jobs:
             static/*,
             docker-compose.yml,
             nginx.conf,
-            scripts/deploy.sh
+            scripts/*
           target: /var/www/code/communications_api/
 
       - name: Deploy over SSH
@@ -51,8 +51,12 @@ jobs:
           key: ${{ secrets.ACTOR_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
-          # Тут стоит сделать переменными порты приложения и хостовой машины, but not today
+          # Тут стоит сделать переменной имя сервера, but not today
           script: |
+            export MY_EMAIL=${{ secrets.MY_EMAIL }}
+            export SERVER_NAME=api.shameoff.site
+            export APP_NAME=communications_api
             cd /var/www/code/communications_api/
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/deploy.sh 
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/deploy.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/certbot.sh
