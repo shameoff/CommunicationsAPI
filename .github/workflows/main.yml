@@ -35,11 +35,11 @@ jobs:
           key: ${{ secrets.ACTOR_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
-          source: "|
-          static/
-          docker-compose.yml
-          nginx.conf
-          scripts/deploy.sh"
+          source: |
+            static/,
+            docker-compose.yml,
+            nginx.conf,
+            scripts/deploy.sh
           target: /var/www/code/communications_api/
 
       - name: Deploy over SSH
