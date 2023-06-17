@@ -16,3 +16,4 @@ if [ "$(docker ps -q -f name=$APP_CONTAINER_NAME)" ]; then
     docker rm $APP_CONTAINER_NAME
 fi
 docker compose up -d --build
+docker exec $APP_CONTAINER_NAME python manage.py migrate
