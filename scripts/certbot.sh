@@ -1,15 +1,18 @@
 #!/bin/bash
 
+# Переменные
+DOMAIN="$SERVER_NAME"
+EMAIL="$MY_EMAIL"
+CRONJOB_NAME="certbot-renew"
+
+echo "Проверка переменных окружения внутри certbot.sh. SERVER_NAME = $SERVER_NAME;
+APP_NAME = $APP_NAME; MY_EMAIL = $MY_EMAIL"
+
 # Проверяем, установлен ли Certbot
 if ! command -v certbot &> /dev/null; then
     echo "Certbot не установлен. Установите Certbot для продолжения."
     exit 1
 fi
-
-# Переменные
-DOMAIN="$SERVER_NAME"
-EMAIL="$MY_EMAIL"
-CRONJOB_NAME="certbot-renew"
 
 # Проверяем наличие сертификата
 certbot certificates --domains "$DOMAIN" | grep -q "Expiry Date"
