@@ -42,7 +42,6 @@ CERT_CONFIG="listen 443 ssl; # managed by Certbot
     server_name $DOMAIN;
     return 404; # managed by Certbot
 "
-sed -i "s/# INSERT_CERT_CONFIG_HERE/I CHANGED THIS, SO THAT THE PROBLEM IS IN CERT_CONFIG/" "/etc/nginx/sites-available/$APP_NAME"
 sed -i "s/# INSERT_CERT_CONFIG_HERE/$CERT_CONFIG/" "/etc/nginx/sites-available/$APP_NAME"
 echo "Дебаг. Поменяли конфиг nginx.conf"
 
