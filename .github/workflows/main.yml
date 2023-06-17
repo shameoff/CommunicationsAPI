@@ -48,11 +48,12 @@ jobs:
         uses: appleboy/ssh-action@v0.1.10
         with:
           username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SUDO_PASSWORD }}
           key: ${{ secrets.ACTOR_PRIVATE_KEY }}
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           # Тут стоит сделать переменными порты приложения и хостовой машины, but not today
-          script: "|
-          echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x deploy.sh 
-          && echo ${{ secrets.SUDO_PASSWORD }} | sudo -S ./deploy.sh 
-          "
+          script: |
+            sudo chmod +x deploy.sh 
+            sudo ./deploy.sh 
+          
