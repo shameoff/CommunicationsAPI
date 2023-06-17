@@ -58,5 +58,5 @@ jobs:
             export APP_NAME=communications_api
             cd /var/www/code/$APP_NAME
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/*.sh 
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/deploy.sh
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S scripts/certbot.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E SERVER_NAME=$SERVER_NAME APP_NAME=$APP_NAME scripts/deploy.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E SERVER_NAME=$SERVER_NAME APP_NAME=$APP_NAME MY_EMAIL=$MY_EMAIL scripts/certbot.sh
