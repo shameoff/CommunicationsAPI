@@ -54,4 +54,4 @@ jobs:
           # Тут стоит сделать переменными порты приложения и хостовой машины, but not today
           script: |
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x deploy.sh 
-            && echo ${{ secrets.SUDO_PASSWORD }} | sudo -S ./deploy.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S ./deploy.sh
