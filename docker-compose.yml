@@ -6,8 +6,11 @@ services:
       dockerfile: Dockerfile
       context: .
     image: shameoff/communications_api:latest
+    command: gunicorn ProjectConfig.wsgi:application -b "localhost:${APP_PORT:-9995}"
+    expose:
+      - "${APP_PORT:-9995}"
     ports:
-      - "5555:8080"
+      - "${APP_PORT:-9995}:${APP_PORT:-9995}"
     restart: unless-stopped
 
 #  db:

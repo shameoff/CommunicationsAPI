@@ -1,12 +1,6 @@
-FROM python:3.9-slim
+FROM python:3.9-alpine
 
-RUN apt update
-
+WORKDIR /app
 COPY . .
-RUN pip install -r requirements.txt
-RUN chmod +x run.sh
-
-# Стоит сделать переменной, чтобы изменялось в run.sh и здесь.
-EXPOSE 8080
-CMD ["./run.sh"]
-
+RUN apk update && pip install -r requirements.txt
+# CMD задаётся через docker-compose.yml, чтобы гибко конфигурировать параметры запуска
