@@ -11,4 +11,4 @@ ln -s /etc/nginx/sites-available/communications_api /etc/nginx/sites-enabled
 service nginx restart
 
 # Запускаем контейнер
-docker compose up -d
+docker compose up -d --build
