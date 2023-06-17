@@ -2,11 +2,11 @@ version: "3.9"
 
 services:
   app:
-    build: # Билд нужен только для разработки. В продакшн среде не используется
-      dockerfile: Dockerfile
-      context: .
+#    build: # Билд нужен только для разработки. В продакшн среде не используется
+#      dockerfile: Dockerfile
+#      context: .
     image: shameoff/communications_api:latest
-    command: gunicorn ProjectConfig.wsgi:application -b "localhost:${APP_PORT:-9995}"
+    command: gunicorn ProjectConfig.wsgi:application -b "0.0.0.0:${APP_PORT:-9995}"
     expose:
       - "${APP_PORT:-9995}"
     ports:
