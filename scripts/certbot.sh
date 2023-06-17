@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Переменные
+# Переменные. Также сюда APP_NAME из env
 DOMAIN="$SERVER_NAME"
 EMAIL="$MY_EMAIL"
 CRONJOB_NAME="certbot-renew"
@@ -18,11 +18,14 @@ has_certificate=$?
 if [ $has_certificate -eq 0 ]; then
     # Сертификат уже существует, проверяем, нужно ли его обновить
     certbot renew --dry-run
+    echo "Дебаг. Сертификат проверили"
 else
+    echo "Дебаг. Сертификат создаётся новый"
     # Сертификат не существует, создаем новый
-    certbot certonly --webroot -w /path/to/your/webroot -d "$DOMAIN" --email "$EMAIL" --agree-tos
+    certbot certonly --webroot -w "/var/www/code/$APP_NAME" -d "$DOMAIN" --email "$EMAIL" --agree-tos
 fi
 
+echo "Дебаг.Дошли до переменной CERT_CONFIG"
 
 # Часть конфигурации, которая вставляется в конфиг сервера, чтобы автоматически конфигурировать сертификат
 CERT_CONFIG="listen 443 ssl; # managed by Certbot
@@ -40,7 +43,8 @@ CERT_CONFIG="listen 443 ssl; # managed by Certbot
     return 404; # managed by Certbot
 "
 
-sed -i "s/# INSERT CERT_CONFIG HERE/$CERT_CONFIG/g" "/etc/nginx/sites-available/$APP_NAME"
+sed -i "s/ # INSERT CERT_CONFIG HERE/$CERT_CONFIG/g" "/etc/nginx/sites-available/$APP_NAME"
+echo "Дебаг. Поменяли конфиг nginx.conf"
 
 # Проверяем наличие cronjob для автоматического обновления
 if ! crontab -l | grep -q "$CRONJOB_NAME"; then
