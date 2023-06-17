@@ -1,6 +1,7 @@
 #!/bin/bash
 export APP_PORT=9996
 export SERVER_NAME=api.shameoff.site
+export DEBUG=0
 
 # Настраиваем конфиг nginx.conf
 sed -i "s/templateServerName/$SERVER_NAME/g" nginx.conf
