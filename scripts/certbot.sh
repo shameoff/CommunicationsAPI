@@ -47,7 +47,7 @@ BEGIN {
   gsub("# INSERT_CERT_CONFIG_HERE", cert_config)
   print
 }
-' "/etc/nginx/sites-available/$APP_NAME" temp_file && mv temp_file "/etc/nginx/sites-available/$APP_NAME"
+' "/etc/nginx/sites-available/$APP_NAME" > temp_file && mv temp_file "/etc/nginx/sites-available/$APP_NAME"
 
 # Проверяем наличие cronjob для автоматического обновления
 if ! crontab -l | grep -q "$CRONJOB_NAME"; then
