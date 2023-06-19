@@ -8,7 +8,7 @@ from django.db import models
 class Interlocutor(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, default=None)
     description = models.TextField(null=True)
-    user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
+    owner = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
 
     def calculate_rating(self):
         pass
