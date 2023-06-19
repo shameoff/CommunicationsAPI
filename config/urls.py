@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import routers, permissions
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -29,7 +31,24 @@ router = routers.DefaultRouter()
 router.register('interlocutors', InterlocutorViewSet, basename='interlocutors')
 router.register('communications', CommunicationsViewSet, basename="communications")
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Communications API",
+        default_version='v1',
+        description="Здесь могла быть ваша реклама",
+        terms_of_service="Тут можно воткнуть ссылку на правила использования",
+        contact=openapi.Contact(email="telegram.me/shameoff"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
+
 urlpatterns = [
+    path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
