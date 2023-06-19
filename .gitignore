@@ -8,6 +8,7 @@ media
 
 # Backup files # 
 *.bak 
+postgres_data/
 
 # If you are using PyCharm #
 .idea/
