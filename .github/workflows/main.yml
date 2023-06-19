@@ -54,9 +54,10 @@ jobs:
           # Тут стоит сделать переменной имя сервера, but not today
           script: |
             export MY_EMAIL=${{ secrets.MY_EMAIL }}
-            export SERVER_NAME=api.shameoff.site
+            export APP_DOMAIN=api.shameoff.site
             export APP_NAME=communications_api
+            export APP_PORT=9996
             cd /var/www/code/$APP_NAME
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/*.sh 
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E SERVER_NAME=$SERVER_NAME APP_NAME=$APP_NAME scripts/deploy.sh
-            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E SERVER_NAME=$SERVER_NAME APP_NAME=$APP_NAME MY_EMAIL=$MY_EMAIL scripts/certbot.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E APP_DOMAIN=$APP_DOMAIN APP_NAME=$APP_NAME APP_PORT=$APP_PORT scripts/deploy.sh
+            echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E APP_DOMAIN=$APP_DOMAIN APP_NAME=$APP_NAME MY_EMAIL=$MY_EMAIL APP_PORT=$APP_PORT scripts/certbot.sh
