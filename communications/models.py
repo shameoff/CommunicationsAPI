@@ -5,18 +5,12 @@ from django.db import models
 # Коммуникация (id, Дата, Балл, Пользователь, собеседник, мероприятие* (если было создано на мероприятии))
 
 
-class Interlocutor(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False, default=None)
-    description = models.TextField(null=True)
-    user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
-
-    def calculate_rating(self):
-        pass
-
-
 class Communication(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False, default=None)
-    description = models.TextField(null=True)
-    date = models.DateTimeField(auto_now_add=True, null=True)
-    rate = models.IntegerField(null=False, blank=False, default=None)
-    interlocutor = models.ForeignKey('communications.Interlocutor', default=None, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField()
+    user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE, related_name='user')
+    foreign_user = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE, related_name='foreign_user')
+    event = models.ForeignKey('events.Event', on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.foreign_user}'

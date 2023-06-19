@@ -1,18 +1,12 @@
 from django.shortcuts import render
-from rest_framework import generics, serializers
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import generics
 
-from communications.models import Communication, Interlocutor
-from communications.serializers import InterlocutorSerializer, CommunicationsSerializer
+from communications.models import Communication
+from communications.serializers import CommunicationSerializer
 
 
 # Create your views here.
 
-class CommunicationsViewSet(ModelViewSet):
+class CommunicationAPIView(generics.ListAPIView):
     queryset = Communication.objects.all()
-    serializer_class = CommunicationsSerializer
-
-
-class InterlocutorViewSet(ModelViewSet):
-    queryset = Interlocutor.objects.all()
-    serializer_class = InterlocutorSerializer
+    serializer_class = CommunicationSerializer
