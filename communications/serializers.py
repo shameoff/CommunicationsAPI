@@ -1,9 +1,27 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
-from communications.models import Communication
+from communications.models import Communication, Interlocutor
 
 
-class CommunicationSerializer(serializers.ModelSerializer):
+class CommunicationsSerializer(ModelSerializer):
     class Meta:
         model = Communication
-        fields = '__all__'
+        fields = ["name",
+                  "description",
+                  "date",
+                  "rate",
+                  "interlocutor"]
+
+    def create(self, validated_data):
+        return Communication.objects.create(**validated_data)
+
+
+class InterlocutorSerializer(ModelSerializer):
+    class Meta:
+        model = Interlocutor
+        fields = ["name",
+                  "description",
+                  "user"]
+
+    def create(self, validated_data):
+        return Interlocutor.objects.create(**validated_data)
