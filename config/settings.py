@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'drf_yasg',
+    'djoser',
+    'drf_spectacular',
     'users',
     'events',
     'communications',
@@ -75,6 +76,14 @@ TEMPLATES = [
     },
 ]
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
 WSGI_APPLICATION = 'config.wsgi.application'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -106,9 +115,16 @@ AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication'
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
+
+DJOSER = {
+    'SEND_ACTIVATION_EMAIL': False
 }
 
 SIMPLE_JWT = {
