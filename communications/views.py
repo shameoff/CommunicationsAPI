@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from communications.models import Communication, Interlocutor
 from communications.serializers import CommunicationsSerializer, InterlocutorListSerializer, \
     InterlocutorDetailSerializer
+from rest_framework.permissions import *
 
 
 # Create your views here.
@@ -13,6 +14,7 @@ from communications.serializers import CommunicationsSerializer, InterlocutorLis
 class CommunicationsViewSet(ModelViewSet):
     queryset = Communication.objects.all()
     serializer_class = CommunicationsSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         # Получение текущего пользователя
@@ -32,6 +34,7 @@ class CommunicationsViewSet(ModelViewSet):
 
 class InterlocutorViewSet(ModelViewSet):
     queryset = Interlocutor.objects.all()
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -39,4 +42,3 @@ class InterlocutorViewSet(ModelViewSet):
         elif self.action == 'retrieve':
             return InterlocutorDetailSerializer
         return super().get_serializer_class()
-
