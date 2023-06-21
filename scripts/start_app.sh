@@ -1,5 +1,6 @@
 #!/bin/bash
 export APP_NAME=$APP_NAME
+export MINIO_PORT=$MINIO_PORT
 export APP_CONTAINER_NAME="${APP_NAME}_app"
 export DEBUG=0
 
