@@ -83,6 +83,7 @@ SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
     'SCHEMA_PATH_PREFIX_TRIM': True,
     'SERVERS': [
+        {'url': 'http://localhost:8000/api/v1'},
         {'url': 'https://api.shameoff.site/api/v1',
          'description': 'Production server'}],
     # OTHER SETTINGS
@@ -110,12 +111,11 @@ DATABASES = {
 }
 
 ADMINS = (  # CHANGE PASSWORD AS SOON AS YOU STARTED THE SERVER
-    # ('Your Name', 'your_email@domain.com', 'init_password'),
-    ('admin', 'admin@mail.com', 'userpass1'),
+    # ('your_email@domain.com', 'init_password'),
+    ('admin@mail.com', 'userpass1'),
 )
 
 AUTH_USER_MODEL = 'users.ExtendedUser'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -128,7 +128,8 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'SEND_ACTIVATION_EMAIL': False
+    'SEND_ACTIVATION_EMAIL': False,
+    'LOGIN_FIELD': 'email'
 }
 
 SIMPLE_JWT = {
@@ -207,8 +208,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     # Здесь перечислите разрешенные домены
-    # 'https://example.com',
-    # ...
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -6,6 +8,7 @@ from django.db import models
 
 
 class Interlocutor(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, null=False, blank=False, default=None)
     description = models.TextField(null=True)
     owner = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
@@ -15,6 +18,7 @@ class Interlocutor(models.Model):
 
 
 class Communication(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, null=False, blank=False, default=None)
     description = models.TextField(null=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
