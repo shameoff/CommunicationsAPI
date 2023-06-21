@@ -6,11 +6,12 @@ services:
 #      dockerfile: Dockerfile
 #      context: .
     image: shameoff/communications_api:latest
-    command: |
-      python manage.py migrate
-      python manage.py initadmin
-      gunicorn config.wsgi:application -b "0.0.0.0:8080"
-
+    command: > 
+      /bin/sh -c "
+        python manage.py migrate &&
+        python manage.py initadmin && 
+        gunicorn config.wsgi:application -b "0.0.0.0:8080"
+      "
     container_name: ${APP_CONTAINER_NAME:-communications_api_app}
     depends_on:
       - db
