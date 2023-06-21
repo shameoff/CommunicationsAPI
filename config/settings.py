@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'communications',
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +93,11 @@ DATABASES = {
     }
 }
 
+ADMINS = (  # CHANGE PASSWORD AS SOON AS YOU STARTED THE SERVER
+    # ('Your Name', 'your_email@domain.com', 'init_password'),
+    ('admin', 'admin@mail.com', 'userpass1'),
+)
+
 AUTH_USER_MODEL = 'users.ExtendedUser'
 AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
@@ -105,7 +109,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5, minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": False,
@@ -172,7 +176,6 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
