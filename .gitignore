@@ -9,6 +9,7 @@ media
 # Backup files # 
 *.bak 
 postgres_data/
+minio_data/
 
 # If you are using PyCharm #
 .idea/
