@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -5,6 +7,7 @@ from django.db import models
 # Мероприятие (id, Название, Фото*, Описание*, Оценка, Список Коммуникаций, Дата)
 
 class Event(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='events/images', blank=True)
     description = models.TextField()

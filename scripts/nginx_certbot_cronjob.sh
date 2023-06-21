@@ -3,6 +3,7 @@
 # Перемещаем nginx.conf в конфиг nginx сервера и сразу включаем его по правила nginx (мягкая ссылка)
 sed -i "s/templateServerName/$APP_DOMAIN/g" nginx.conf
 sed -i "s/templateAppPort/$APP_PORT/g" nginx.conf
+sed -i "s/templateMinioPort/$MINIO_PORT/g" nginx.conf
 mv nginx.conf "/etc/nginx/sites-available/${APP_NAME}"
 ln -s "/etc/nginx/sites-available/${APP_NAME}" /etc/nginx/sites-enabled
 
