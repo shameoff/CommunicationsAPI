@@ -6,3 +6,5 @@ from django.db import models
 
 class ExtendedUser(AbstractUser):
     email = models.EmailField(null=False, blank=True)
+
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']

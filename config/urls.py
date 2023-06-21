@@ -31,17 +31,14 @@ router.register('interlocutors', InterlocutorViewSet, basename='interlocutors')
 router.register('communications', CommunicationsViewSet, basename="communications")
 
 urlpatterns = [
-    # YOUR PATTERNS
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    # Optional UI:
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
     path('admin/', admin.site.urls),
 
     path('api/v1/', include(router.urls)),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     path('auth/', include('djoser.urls.base')),
     path('auth/', include('djoser.urls.jwt')),
