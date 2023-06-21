@@ -60,6 +60,10 @@ jobs:
             export APP_NAME=communications_api
             export APP_PORT=9996
             cd /var/www/code/$APP_NAME
+            echo "Time before chmod $(date +%T)"
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S chmod +x scripts/*.sh 
+            echo "Time before start_app $(date +%T)"
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E APP_DOMAIN=$APP_DOMAIN APP_NAME=$APP_NAME APP_PORT=$APP_PORT scripts/start_app.sh
+            echo "Time after start_app $(date +%T)"
             echo ${{ secrets.SUDO_PASSWORD }} | sudo -S -E APP_DOMAIN=$APP_DOMAIN APP_NAME=$APP_NAME MY_EMAIL=$MY_EMAIL APP_PORT=$APP_PORT scripts/nginx_certbot_cronjob.sh
+            echo "Time after certbot $(date +%T)"
