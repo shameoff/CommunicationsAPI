@@ -1,6 +1,8 @@
 import uuid
 
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from rest_framework import serializers
 
 
 # Create your models here.
@@ -22,5 +24,5 @@ class Communication(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, default=None)
     description = models.TextField(null=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
-    rate = models.IntegerField(null=False, blank=False, default=None)
+    rate = models.IntegerField(null=False, blank=False, default=None, validators=[MinValueValidator(-2), MaxValueValidator(2)])
     interlocutor = models.ForeignKey('communications.Interlocutor', default=None, on_delete=models.CASCADE)
