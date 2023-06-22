@@ -16,9 +16,6 @@ class Interlocutor(models.Model):
     description = models.TextField(null=True)
     owner = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
 
-    def calculate_rating(self):
-        pass
-
 
 class Communication(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

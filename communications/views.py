@@ -39,6 +39,4 @@ class InterlocutorViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return InterlocutorListSerializer
-        elif self.action == 'retrieve':
-            return InterlocutorDetailSerializer
-        return super().get_serializer_class()
+        return InterlocutorDetailSerializer

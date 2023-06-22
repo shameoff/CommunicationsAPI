@@ -7,9 +7,11 @@ from communications.models import Communication, Interlocutor
 class CommunicationsSerializer(ModelSerializer):
     class Meta:
         model = Communication
-        fields = ["id", "name", "description", "date", "rate"]
+        fields = ["id", "name", "description", "date", "rate", "interlocutor"]
         read_only_fields = ["id"]
-
+        extra_kwargs = {
+            'interlocutor': {'write_only': True}
+        }
     def create(self, validated_data):
         return Communication.objects.create(**validated_data)
 
