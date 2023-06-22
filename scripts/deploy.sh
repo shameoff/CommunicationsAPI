@@ -16,14 +16,14 @@ docker compose pull # Подтягиваем новый билд контейн�
 docker compose up -d --build # Запускаем контейнер
 docker exec "$APP_CONTAINER_NAME" python manage.py migrate
 
-# Перемещаем nginx в конфиг nginx сервера и сразу включаем его по правила nginx (мягкая ссылка)
-sed -i "s/APP_PORT/$APP_PORT/g" nginx
-sed -i "s/APP_DOMAIN/$APP_DOMAIN/g" nginx
-sed -i "s/MINIO_PORT/$MINIO_PORT/g" nginx
-sed -i "s/MINIO_DOMAIN/$MINIO_DOMAIN/g" nginx
+# Перемещаем nginx.conf в конфиг nginx сервера и сразу включаем его по правилам nginx (символьная ссылка)
+sed -i "s/APP_PORT/$APP_PORT/g" nginx.conf
+sed -i "s/APP_DOMAIN/$APP_DOMAIN/g" nginx.conf
+sed -i "s/MINIO_PORT/$MINIO_PORT/g" nginx.conf
+sed -i "s/MINIO_DOMAIN/$MINIO_DOMAIN/g" nginx.conf
 
 # Перемещаем конфиг и создаём символьную ссылку после перемещения
-mv nginx "/etc/nginx/sites-available/${APP_NAME}"
+mv nginx.conf "/etc/nginx/sites-available/${APP_NAME}"
 if [ ! -L "/etc/nginx/sites-enabled/$APP_NAME" ]; then
     ln -s "/etc/nginx/sites-available/$APP_NAME" /etc/nginx/sites-enabled
     echo "Symbolic link created."
@@ -47,7 +47,9 @@ else
     # Сертификат не существует, создаем новый
     echo "Сертификат не существует, создается новый"
     certbot certonly --webroot -w "/var/www/code/$APP_NAME" \
-     -d $APP_DOMAIN -d $MINIO_DOMAIN --email "$MY_EMAIL" --agree-tos --no-eff-email
+     -d $APP_DOMAIN -d $MINIO_DOMAIN \
+     --email "$MY_EMAIL" --agree-tos --no-eff-email \
+     --expand
 fi
 
 # Проверяем наличие cronjob для автоматического обновления сертификата

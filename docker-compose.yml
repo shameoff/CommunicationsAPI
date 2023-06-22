@@ -47,8 +47,8 @@ services:
     command: minio server /data
     restart: unless-stopped
     environment:
-      MINIO_ROOT_USER: "admin"
-      MINIO_ROOT_PASSWORD: "password"
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-password}
       MINIO_DOMAIN: $MINIO_DOMAIN
       MINIO_BROWSER_REDIRECT_URL: "https://$MINIO_DOMAIN"
       MINIO_CONSOLE_ADDRESS: "0.0.0.0:9090" # тут указывается полный адрес, в нашем случае "localhost:9090"
