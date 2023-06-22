@@ -49,11 +49,11 @@ services:
     environment:
       MINIO_ROOT_USER: "admin"
       MINIO_ROOT_PASSWORD: "password"
-      MINIO_DOMAIN: "api.shameoff.site:19080"
-      MINIO_BROWSER_REDIRECT_URL: "http://api.shameoff.site:19080/minio/"
+      MINIO_DOMAIN: $MINIO_DOMAIN
+      MINIO_BROWSER_REDIRECT_URL: "https://$MINIO_DOMAIN"
       MINIO_CONSOLE_ADDRESS: "0.0.0.0:9090" # тут указывается полный адрес, в нашем случае "localhost:9090"
     ports:
-      - "8030:9000"
-      - "${MINIO_PORT}:9090"
+#      - "8030:9000"
+      - "${MINIO_CONSOLE_PORT}:9090"
     volumes:
       - "./minio_data:/data"
