@@ -19,7 +19,7 @@ docker exec "$APP_CONTAINER_NAME" python manage.py migrate
 # Перемещаем nginx.conf в конфиг nginx сервера и сразу включаем его по правилам nginx (символьная ссылка)
 sed -i "s/APP_PORT/$APP_PORT/g" nginx.conf
 sed -i "s/APP_DOMAIN/$APP_DOMAIN/g" nginx.conf
-sed -i "s/MINIO_PORT/$MINIO_PORT/g" nginx.conf
+sed -i "s/MINIO_CONSOLE_PORT/$MINIO_CONSOLE_PORT/g" nginx.conf
 sed -i "s/MINIO_DOMAIN/$MINIO_DOMAIN/g" nginx.conf
 
 # Перемещаем конфиг и создаём символьную ссылку после перемещения
