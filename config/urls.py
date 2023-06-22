@@ -26,6 +26,7 @@ from rest_framework_simplejwt.views import (
 
 from communications.views import CommunicationsViewSet, InterlocutorViewSet
 from events.views import EventViewSet
+from files.views import FileUploadView
 
 router = routers.DefaultRouter()
 router.register('interlocutors', InterlocutorViewSet, basename='interlocutors')
@@ -43,4 +44,8 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api/v1/auth/', include('djoser.urls.base')),
     path('api/v1/auth/', include('djoser.urls.jwt')),
+
+    path('api/v1/files/upload/', FileUploadView.as_view(), name='file-upload'),
+    path('api/v1/files/<str:filename>/', FileUploadView.as_view(), name='file-download'),
+
 ]

@@ -211,3 +211,9 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Конфигурация файлового сервера Minio
+MINIO_ENDPOINT = 'your-minio-endpoint'  # Адрес Minio сервера
+MINIO_ACCESS_KEY = 'your-minio-access-key'  # Ключ доступа для аутентификации
+MINIO_SECRET_KEY = 'your-minio-secret-key'  # Секретный ключ для аутентификации
+MINIO_BUCKET_NAME = 'your-minio-bucket-name'  # Имя бакета, в котором будут храниться файлы
