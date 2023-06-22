@@ -12,8 +12,5 @@ class Event(models.Model):
     title = models.CharField(max_length=100)
     image_id = models.CharField(blank=True, null=True, max_length=100)
     description = models.TextField()
-    rating = models.IntegerField(null=False, blank=False, default=None, validators=[MinValueValidator(-2), MaxValueValidator(2)])
+    rate = models.IntegerField(null=False, blank=False, default=None, validators=[MinValueValidator(-2), MaxValueValidator(2)])
     date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title

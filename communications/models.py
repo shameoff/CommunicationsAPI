@@ -24,3 +24,4 @@ class Communication(models.Model):
     date = models.DateTimeField(auto_now_add=True, null=True)
     rate = models.IntegerField(null=False, blank=False, default=None, validators=[MinValueValidator(-2), MaxValueValidator(2)])
     interlocutor = models.ForeignKey('communications.Interlocutor', default=None, on_delete=models.CASCADE)
+    event = models.ForeignKey('events.Event', default=None, null=True, on_delete=models.SET_DEFAULT)
