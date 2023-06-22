@@ -12,6 +12,7 @@ from rest_framework import serializers
 class Interlocutor(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, null=False, blank=False, default=None)
+    image_id = models.CharField(blank=True, null=True, max_length=100, default=None)
     description = models.TextField(null=True)
     owner = models.ForeignKey('users.ExtendedUser', on_delete=models.CASCADE)
 

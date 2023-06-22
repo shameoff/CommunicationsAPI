@@ -25,10 +25,12 @@ from rest_framework_simplejwt.views import (
 )
 
 from communications.views import CommunicationsViewSet, InterlocutorViewSet
+from events.views import EventViewSet
 
 router = routers.DefaultRouter()
 router.register('interlocutors', InterlocutorViewSet, basename='interlocutors')
 router.register('communications', CommunicationsViewSet, basename="communications")
+router.register('events', EventViewSet, basename='events')
 
 urlpatterns = [
     path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

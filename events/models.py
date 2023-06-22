@@ -9,10 +9,9 @@ from django.db import models
 class Event(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='events/images', blank=True)
+    image_id = models.CharField(blank=True, null=True, max_length=100)
     description = models.TextField()
     rating = models.IntegerField()
-    communications = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

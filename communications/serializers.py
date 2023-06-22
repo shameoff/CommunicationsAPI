@@ -16,12 +16,13 @@ class CommunicationsSerializer(ModelSerializer):
 
 class InterlocutorListSerializer(serializers.ModelSerializer):
     rate = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Interlocutor
-        fields = ('id', 'name', 'description', 'rate', 'avatar_url')
+        fields = ('id', 'name', 'description', 'rate', 'image_id', 'image_url')
 
-    def get_avatar_url(self, obj):
+    def get_image_url(self, obj):
         pass
 
     def get_rate(self, obj):
@@ -33,13 +34,14 @@ class InterlocutorListSerializer(serializers.ModelSerializer):
 class InterlocutorDetailSerializer(ModelSerializer):
     communications = serializers.SerializerMethodField()
     rate = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Interlocutor
-        fields = ["id", "name", "description", "communications", "owner", 'rate', 'avatar_url', 'avatar_id']
+        fields = ["id", "name", "description", "communications", "owner", 'rate', 'image_url', 'image_id']
         read_only_fields = ["id", "communications", "owner", 'rate']
 
-    def get_avatar_url(self, obj):
+    def get_image_url(self, obj):
         pass
 
     def get_communications(self, obj):
