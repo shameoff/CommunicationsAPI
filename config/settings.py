@@ -28,22 +28,23 @@ DEBUG = bool(int(os.getenv('DEBUG', False)))
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'corsheaders',
-    'djoser',
-    'drf_spectacular',
-    'users',
-    'events',
-    'communications',
-]
+BASE_APPS = ('django.contrib.admin',
+             'django.contrib.auth',
+             'django.contrib.contenttypes',
+             'django.contrib.sessions',
+             'django.contrib.messages',
+             'django.contrib.staticfiles',
+             )
+THIRD_PARTY_APPS = ('rest_framework',
+                    'rest_framework_simplejwt',
+                    'corsheaders',
+                    'djoser',
+                    'drf_spectacular',)
+MY_APPS = ('users',
+           'events',
+           'communications',)
+
+INSTALLED_APPS = [*BASE_APPS, *THIRD_PARTY_APPS, *MY_APPS]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,12 +84,11 @@ SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
     'SCHEMA_PATH_PREFIX_TRIM': True,
     'SERVERS': [
-        {'url': 'http://localhost:8000/api/v1'},
         {'url': 'https://api.shameoff.site/api/v1',
-         'description': 'Production server'}],
+         'description': 'Production server'},
+        {'url': 'http://localhost:8000/api/v1'}]
     # OTHER SETTINGS
 }
-
 WSGI_APPLICATION = 'config.wsgi.application'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

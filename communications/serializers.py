@@ -12,6 +12,7 @@ class CommunicationsSerializer(ModelSerializer):
         extra_kwargs = {
             'interlocutor': {'write_only': True}
         }
+
     def create(self, validated_data):
         return Communication.objects.create(**validated_data)
 
@@ -46,13 +47,13 @@ class InterlocutorDetailSerializer(ModelSerializer):
     def get_image_url(self, obj):
         pass
 
-    def get_communications(self, obj):
+    def get_communications(self, obj) -> list:
         communications = obj.communication_set.all()
         # Сериализуем диалоги
         serializer = CommunicationsSerializer(communications, many=True)
         return serializer.data
 
-    def get_rate(self, obj):
+    def get_rate(self, obj) -> int:
         communications = obj.communication_set.all()
         total_rate = sum(communication.rate for communication in communications)
         return total_rate

@@ -15,7 +15,7 @@ class EventSerializer(serializers.ModelSerializer):
     def get_image_url(self, obj):
         pass
 
-    def get_communications(self, obj):
+    def get_communications(self, obj) -> list:
         communications = obj.communication_set.all()
         # Сериализуем диалоги
         serializer = CommunicationsSerializer(communications, many=True)
